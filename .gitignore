@@ -1,5 +1,6 @@
 ## MAC files ##
 .DS_Store
+./server/password.js
 
 ## NPM ##
 npm
