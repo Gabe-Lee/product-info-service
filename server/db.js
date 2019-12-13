@@ -1,16 +1,17 @@
 const mysql = require('mysql');
 const password = require('./password.js');
 const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
+    host: 'product-database.cdrcwxiifuzp.us-east-2.rds.amazonaws.com',
+    port: 3306,
+    user: 'admin',
     password: password,
     database: 'Products'
 });
 
 connection.connect(() => console.log('Connected to Database!'));
 
-let selectAllProducts = (callback) => {
-    connection.query('SELECT * FROM Products.info', (err, results) => {
+let updateOneProduct = (callback, id, newAvg, newTotal) => {
+    connection.query(`UPDATE Products.info SET reviewAvg=${newAvg}, reviewCount=${newTotal} WHERE id = ${id}`, (err, results) => {
         if (err) {
             callback(err, null)
         } else {
@@ -29,5 +30,5 @@ let selectOneProduct = (callback, id) => {
     })
 };
 
-module.exports = {selectOneProduct, selectAllProducts};
+module.exports = {selectOneProduct, updateOneProduct};
 
