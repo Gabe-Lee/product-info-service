@@ -1,0 +1,636 @@
+body {
+  font-family: 'Noto IKEA', 'Noto Sans', 'Roboto', 'Open Sans', sans-serif
+}
+
+.b_mainContainer {
+  display: flex;
+  flex-direction: column;
+  /* border: solid black 1px; */
+  align-items: flex-end;
+  width: 355px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.b_topPackage {
+  /*border: solid black 1px;*/
+  width: 355px;
+}
+
+.b_newBox {
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  background: #ca5007;
+  font-size: .75rem;
+  line-height: 1rem;
+  border-radius: 10px;
+  border: solid black 1px;
+  width: fit-content;
+  padding: 0 .4rem .1rem;
+  margin: 10px 10px 0 7px;
+}
+
+.b_salePrice {
+  background: #ffce00;
+  padding: .35rem .4rem;
+  margin-bottom: .4rem;
+  margin-top: .2rem;
+  box-shadow: 4px 4px 0 0 #ef4123;
+  margin-right: auto;
+}
+
+.b_dealLenTag {
+  margin: 0 0 0 6px;
+}
+
+.b_regPriceTag {
+  margin-left: 6px;
+  margin-top: .5rem;
+  margin-bottom: 0;
+}
+
+.b_familyLabel {
+  background: #0077c8;
+  color: #fff;
+  display: inline-block;
+  padding: .2rem .5rem;
+  font-size: .75rem;
+  width: fit-content;
+  margin: 1em;
+  font-weight: 600;
+}
+
+.b_benefitDescr {
+  display: flex;
+  flex-direction: column;
+  font-size: .875rem;
+  margin: 10px;
+  width: 280px;
+  line-height: 1.5em;
+}
+
+.b_productHeading {
+  font-size: large;
+  margin: 10px 10px 1px 10px;
+}
+
+.b_productDescr {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  margin: .9em 1em .2em .6em;
+
+}
+
+.b_productMiniDescr {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  margin: .4em 1em .2em .6em;
+  cursor: pointer;
+  transition: 0.1s;
+}
+
+.b_productMiniDescr:hover {
+  text-decoration: underline;
+  opacity: .7;
+}
+
+.b_productDescrAvg {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  margin: .4em .3em .2em .2em;
+}
+
+.b_productPrice {
+  font-size: xx-large;
+  font-weight: bold;
+  margin: 1px 10px;
+}
+
+.b_readMore {
+  color: #407ab1;
+  background: transparent;
+  text-decoration: underline;
+}
+
+.b_reviewPullDown {
+  color: #407ab1;
+  background: transparent;
+}
+
+.b_optionContainer {
+  display: flex;
+  flex-direction: column;
+  margin: .3em 1em .1em .7em;
+  font-size: .87em;
+  font-weight: 600;
+  width: 20.8em;
+}
+
+.b_option {
+  border: solid lightgray 1px;
+  border-radius: 2px;
+  margin-top: 0.5em;
+  font-size: 12px;
+  display: flex;
+  padding-bottom: 5px;
+}
+
+.b_openOptions {
+  display: flex;
+  width: 20%;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.b_optionTitle {
+  width: 100%;
+  padding: 1em;
+}
+
+.b_optionText {
+  display: flex;
+  padding-top: .3em;
+  font-size: medium;
+  font-weight: 300;
+}
+
+.b_colorOptText {
+  opacity: .6;
+  font-weight: 300;
+}
+
+.b_optButton {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+
+.b_popoutContainer {
+  background-color: #fff;
+  border-radius: 3px;
+  min-height: 100%;
+}
+
+.b_starContainer {
+  display: inline-block;
+  white-space: nowrap;
+  width: 7.5rem;
+  height: 1.2rem;
+  position: relative;
+  margin-right: .33333rem
+}
+
+.b_star {
+  background-image: url('https://www.ikea.com/us/en/resources/svg/rating-star-empty.ef7993798f794919.svg');
+  display: inline-block;
+  height: 1.5rem;
+  width: 100%;
+  background-size: 1.5rem;
+  position: absolute;
+  z-index: 2;
+}
+
+.b_starColor {
+  background-image: url('https://www.ikea.com/us/en/resources/svg/rating-star.6a2641a7f1dad122.svg');
+  display: inline-block;
+  height: 1.5rem;
+  width: 100%;
+  background-size: 1.5rem;
+  position: absolute;
+  z-index: 3;
+}
+
+.b_warningDiv {
+  display: flex;
+  color: #111;
+  font-size: .875rem;
+  line-height: 1rem;
+}
+
+.b_warningLogo {
+  background-image: url('https://www.ikea.com/us/en/resources/svg/must-be-completed-with-disclaimer.ed6419f0846570d4.svg');
+  vertical-align: middle;
+}
+
+.b_logoProps {
+  background-repeat: no-repeat;
+  width: 1.25em;
+  height: 1.25em;
+  margin: .98em 0.2em 1em 0.9em;
+}
+
+.b_warningUl {
+  padding-left: .5rem;
+}
+
+.b_warningli {
+  padding-bottom: .5rem;
+  list-style-type: none;
+}
+
+
+.b_middlePackage {
+  width: 355px;
+}
+
+.b_quantityBox {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid #959595;
+  border-radius: 2px;
+  box-shadow: inset 0 0 0 1px transparent;
+  width: 52%;
+}
+
+.b_quantityTitle {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  font-size: medium;
+  font-weight: 300;
+  text-align: left;
+  width: 50%;
+}
+
+#b_Quantity {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 40px 10px 40px;
+}
+
+.b_flexContainerMiddle {
+  display: flex;
+  flex-direction: row;
+  margin: 1em .7em 0em .7em;
+}
+
+.b_modal {
+  display: none;
+  position: fixed;
+  z-index: 110;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+}
+
+.b_modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 60%;
+  height: min-content;
+  overflow: auto;
+  position: relative;
+}
+
+.b_close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.b_centerText {
+  text-align: center;
+  font-size: 2em;
+  font-weight: bolder;
+  margin: 16px;
+}
+
+.b_outerAtag {
+  width: 100%;
+  height: 100%;
+  margin: 1em;
+}
+
+.b_outerAtag:hover {
+  background-color: #fff;
+  filter: brightness(88%);
+}
+
+.b_optHolder {
+  display: flex;
+  margin-left: 3rem;
+  margin-right: 3rem;
+  padding-bottom: 4rem;
+  overflow: auto;
+}
+
+.b_innerOpt {
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: larger;
+  font-weight: 200;
+}
+
+
+
+.b_optImage {
+  width: 100%;
+  height: auto;
+}
+
+
+.b_decrQuant {
+  text-align: center;
+  display: inline-block;
+  text-decoration: none;
+  border: 0;
+  font-weight: 700;
+  font-size: .875rem;
+  line-height: 1.7143;
+  cursor: pointer;
+  padding: 10px;
+}
+
+
+.b_incQuant {
+  text-align: center;
+  display: inline-block;
+  text-decoration: none;
+  border: 0;
+  font-weight: 700;
+  font-size: .875rem;
+  line-height: 1.7143;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.b_buttonContainer {
+  margin: 1em 1em .8em .7em;
+}
+
+.b_shoppingBagButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0058a3;
+  color: #fff;
+  border-radius: 2px;
+  padding: 1rem 1.5rem;
+  width: 102%;
+  font-weight: 700;
+  font-size: .875rem;
+  line-height: 1.7143;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.b_shoppingBagButton:hover {
+  opacity: 0.7;
+}
+
+
+.b_shoppingListButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f5f5;
+  color: #111;
+  padding: .75rem 1.5rem;
+  border-radius: 2px;
+  width: 102%;
+  margin: 1em 0 0 0;
+  font-weight: 700;
+  font-size: .875rem;
+  line-height: 1.7143;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.b_shoppingListButton:hover {
+  opacity: 0.7;
+  background: lightgrey;
+}
+
+.b_shoppingListSVG {
+  margin-right: 1em;
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+.b_shoppingBagSVG {
+  margin-right: 1em;
+  height: 1.5rem;
+  width: 1.5rem;
+  fill: white;
+}
+
+.b_notQuitePerfectContainer {
+  margin: 1rem;
+}
+
+.b_notQuitePerfectIcon {
+  width: 2rem;
+  height: 2rem;
+}
+
+.b_innerNotQuitePerfect {
+  padding: .4rem 1rem .1rem 1rem;
+  background: #f7f7f7;
+  height: 9em;
+  font-size: .7rem;
+  position: relative;
+}
+
+.b_NotQuitePerfectHeadline {
+  margin: 0;
+  font-size: .75rem;
+}
+
+.b_NotQuitePerfectText {
+  margin-bottom: .25rem;
+  margin-top: .1em;
+}
+
+.b_openPlannerTag {
+  background-color: transparent;
+  color: #0058a3;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.b_innerDiv {
+  font-size: 1.25rem;
+  position: absolute;
+  left: 1rem;
+}
+
+.b_innerText {
+  padding-left: 2.25rem;
+}
+
+.b_lastPackage {
+  margin-bottom: 8em;
+  width: 355px;
+}
+
+.b_deliveryBox {
+  width: 95%;
+  border-bottom: 1px solid #ccc;
+}
+
+.b_deliveryHeader {
+  background-color: #fff;
+  padding: 1rem 0;
+  line-height: 1.5;
+  text-align: left;
+  font-size: 1rem;
+  width: 100%;
+  cursor: pointer;
+}
+
+.b_deliveryButton {
+  background-color: #fff;
+  display: contents;
+  padding: 1rem 0;
+  font-size: 1rem;
+  width: 100%;
+}
+
+.b_deliveryArrowFlip {
+  transform: rotate(180deg);
+  transition: 0.3s;
+}
+
+.b_deliveryItems {
+  align-items: center;
+  display: flex;
+  color: #111;
+}
+
+.b_deliveryLogos {
+  align-items: center;
+  display: flex;
+  color: #111;
+  margin-left: .5em;
+}
+
+.b_deliveryTruckLogo {
+  margin-right: .5rem;
+  height: 1.5rem;
+  width: 1.5rem;
+  fill: #111;
+}
+
+.b_deliveryGreenDot {
+  margin-right: .5rem;
+  width: 1rem;
+  height: 1rem;
+}
+
+.b_deliveryArrow {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-left: 4em;
+  fill: #111;
+  cursor: pointer;
+}
+
+#b_deliveryHiddenDiv {
+  display: none;
+  padding: .5rem;
+  font-size: smaller;
+}
+
+
+.b_findStoreBox {
+  line-height: 1.125rem;
+  cursor: pointer;
+}
+
+.b_findStoreHeader {
+  padding: .5rem;
+}
+
+.b_findStoreItems {
+  display: flex;
+}
+
+.b_findStoreLogos {
+  align-items: flex-end;
+  display: flex;
+}
+
+.b_findStoreHouseLogo {
+  width: 2rem;
+  height: 2rem;
+}
+
+.b_findStoreAlertIcon {
+  display: inline-block;
+  height: 1.5rem;
+  width: 1.5rem;
+  vertical-align: middle;
+  fill: #111;
+}
+
+.b_Links {
+  margin-top: .5rem;
+  background-color: transparent;
+  color: #0058a3;
+  text-decoration: underline;
+}
+
+.b_assemblyBox {
+  cursor: pointer;
+}
+
+.b_assemblyHeader {
+  background-color: #fff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 1rem 0;
+  text-align: left;
+  width: 100%;
+}
+
+.b_assemblyItems {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.b_assemblyLogos {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.b_assemblyRabbitLogo {
+  width: 2.2em;
+  margin-right: 0.25em;
+  margin-left: 0.1em;
+}
+
+.b_assemblyAlertIcon {
+  display: flex;
+  align-self: flex-end;
+  height: 1.5rem;
+  width: 1.5rem;
+  vertical-align: middle;
+  fill: #111;
+}
