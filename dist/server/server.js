@@ -10,34 +10,26 @@ app.use(express.json());
 app.use('/', express.static('public'));
 app.use('/bundle', express.static('public/bundle.js'));
 app.use('/styleSheet', express.static('public/style.css'));
-app.get('/displayProduct/:id', function (req, res) {
+app.get('/products/:id', function (req, res) {
     var id = req.params.id;
-    db.selectOneProduct(function (err, results) {
-        if (err) {
-            console.log(err);
-            res.sendStatus(404);
-        }
-        else {
-            res.send(results);
-        }
-    }, Number(id));
+    console.log(typeof id);
+    db.selectOneProduct(Number(id))
+        .then(function (product) {
+        res.status(200).send(product);
+    })
+        .catch(function (err) {
+        res.status(500).send('Error: Product Not Found');
+    });
 });
 app.patch('/updateReviewInfo', function (req, res) {
-    var id = req.body.productId;
-    var newAvg = req.body.newReviewAvg;
-    var newTotal = req.body.newReviewCount;
-    console.log(id);
-    console.log(newAvg);
-    console.log(newTotal);
-    db.updateOneProduct(function (err, results) {
-        if (err) {
-            console.log(err);
-            res.sendStatus(404);
-        }
-        else {
-            res.send(results);
-        }
-    }, id, newAvg, newTotal);
+    var _a = req.body, productId = _a.productId, newReviewAvg = _a.newReviewAvg, newReviewCount = _a.newReviewCount;
+    db.updateOneProduct(productId, newReviewAvg, newReviewCount)
+        .then(function (result) {
+        res.status(200).send();
+    })
+        .catch(function (err) {
+        res.status(500).send('Error: Product Not Found');
+    });
 });
 app.listen(port, function () { return console.log("Listening on port " + port + "!"); });
 //# sourceMappingURL=server.js.map
