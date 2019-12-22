@@ -1,40 +1,40 @@
 import * as express from 'express';
-import * as cors from 'cors';
+import * as Cors from 'cors';
+import { db } from '../database/db';
 
-const app = express();
-const port = 3030;
+const server = express();
+const json = express.json();
+const cors = Cors();
 
-import * as db from '../database/db';
+server.use(cors);
+server.use(json);
 
-app.use(cors());
-app.use(express.json());
+server.use('/', express.static('public'));
+server.use('/bundle', express.static('public/bundle.js'));
+server.use('/style', express.static('public/style.css'));
 
-app.use('/', express.static('public'));
-app.use('/bundle', express.static('public/bundle.js'));
-app.use('/styleSheet', express.static('public/style.css'));
-
-app.get('/products/:id', (req, res) => {
+server.get('/products/:id', (req, res) => {
   const { id } = req.params;
   console.log(typeof id)
-  db.selectOneProduct(Number(id))
+  db.getProduct(Number(id))
     .then((product) => {
       res.status(200).send(product);
     })
     .catch((err) => {
+      console.error(err);
       res.status(500).send('Error: Product Not Found')
     });
 });
 
-app.patch('/updateReviewInfo', (req, res) => {
+server.patch('products/:id/reviews/update', (req, res) => {
   const { productId, newReviewAvg, newReviewCount } = req.body;
-  db.updateOneProduct(productId, newReviewAvg, newReviewCount)
-    .then((result) => {
-      res.status(200).send();
+  db.addReview(productId, newReviewAvg, newReviewCount)
+    .then((updateCount) => {
+      res.status(200).end();
     })
     .catch((err) => {
       res.status(500).send('Error: Product Not Found');
     });
 });
 
-
-app.listen(port, () => console.log(`Listening on port ${port}!`));
+export { server };

@@ -1,10 +1,10 @@
 {
     "name": "product-description-service",
     "scripts": {
-        "start": "node server/index.js",
+        "start": "node dist/server/index.js",
         "client": "webpack -d --watch",
         "build": "webpack --mode production & tsc",
-        "server": "nodemon server/index.js",
+        "server": "nodemon dist/server/index.js",
         "tsc": "tsc --watch",
         "test": "jest"
     },

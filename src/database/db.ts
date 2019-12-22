@@ -1,18 +1,15 @@
-import * as pg from 'pg';
+import { DB } from './postgres';
 import * as ENV from '../env';
+import { Database } from './Interfaces';
 
-const pgClient = new pg.Client(ENV.DB.PG);
+const DATABASE = ENV.DB['PG'][ENV.MODE];
+const pgClient = new pg.Client(DATABASE);
 
 pgClient.connect(() => console.log('Connected to Database!'));
 
-const updateOneProduct = async(id: Number, newAvg: Number, newTotal: Number) => {
-  return true;
-};
+const db: Database = {
+  getProduct: DB.getProduct,
+  addReview: DB.addReview,
+}
 
-const selectOneProduct = async(id: Number) => {
-  const result = await pgClient.query(`SELECT * FROM Products.info WHERE id = ${id}`);
-  console.log(result);
-  return true;
-};
-
-export { selectOneProduct, updateOneProduct };
+export { db };
