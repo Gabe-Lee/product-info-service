@@ -77,7 +77,6 @@ class App extends React.Component {
   changeWidthOnStars() {
     const { productReviewAvg } = this.state;
     const newSizePercent = productReviewAvg * 20;
-    console.log(newSizePercent);
     document.getElementById('b_starColorID').style.width = `${newSizePercent}%`;
   }
 
@@ -85,10 +84,8 @@ class App extends React.Component {
     const { productReviewCounter, productReviewAvg, productId } = this.state;
     const productCounter = productReviewCounter;
     const totalReviewRating = productReviewAvg * productReviewCounter;
-    console.log(totalReviewRating);
     this.setState({ productReviewCounter: productCounter + 1 }, () => {
       const newReviewRatingTotal = totalReviewRating + newReviewRating.newRating;
-      console.log(newReviewRatingTotal);
       const newReviewAvg = (newReviewRatingTotal / productReviewCounter).toFixed(1);
       this.setState({ productReviewAvg: newReviewAvg }, () => {
         axios.patch('/updateReviewInfo', { newReviewCount: productReviewCounter, newReviewAvg: productReviewAvg, productId }, { baseURL: 'http://ikeaproducts.us-east-2.elasticbeanstalk.com' })
