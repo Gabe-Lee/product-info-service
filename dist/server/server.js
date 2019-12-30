@@ -1,8 +1,10 @@
-var express = require('express');
-var cors = require('cors');
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var express = require("express");
+var cors = require("cors");
 var app = express();
 var port = 3030;
-var db = require('./db');
+var db = require("../database/db");
 app.use(cors());
 app.use(express.json());
 app.use('/', express.static('public'));
@@ -18,7 +20,7 @@ app.get('/displayProduct/:id', function (req, res) {
         else {
             res.send(results);
         }
-    }, id);
+    }, Number(id));
 });
 app.patch('/updateReviewInfo', function (req, res) {
     var id = req.body.productId;

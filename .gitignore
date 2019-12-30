@@ -8,3 +8,8 @@ node_modules
 
 ## Source maps ##
 *.map
+
+## Testing ##
+tests
+*.spec*
+*.test*
