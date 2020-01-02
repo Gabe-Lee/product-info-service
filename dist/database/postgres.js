@@ -53,24 +53,22 @@ var db = {
     },
     // (PATCH) => /products/:id/reviews
     addReview: function (id, newReview) {
-        return pgClient.query("UPDATE products SET \n      reviewavg = ((reviewavg*reviewcount)+$1)/(reviewcount+1), reviewcount = reviewcount+1\n      WHERE id = $2\n      RETURNING reviewavg;", [newReview, id]).then(function (result) {
+        return pgClient.query("UPDATE products SET \n      reviewavg = ((reviewavg*reviewcount)+$1)/(reviewcount+1), reviewcount = reviewcount+1\n      WHERE id = $2\n      RETURNING reviewavg, reviewcount;", [newReview, id]).then(function (result) {
             var rowCount = result.rowCount;
             if (rowCount === 0) {
                 throw new RangeError('Could not add review');
             }
-            var reviewavg = result.rows[0].reviewavg;
-            return reviewavg;
+            return result.rows[0];
         });
     },
     // (DELETE) -> /products/:id/reviews
     deleteReview: function (id, newReview) {
-        return pgClient.query("UPDATE products SET\n      reviewAvg = ((reviewavg*reviewcount)-$1)/(reviewcount-1), reviewcount = reviewcount-1\n      WHERE id = $2\n      RETURNING reviewavg;", [newReview, id]).then(function (result) {
+        return pgClient.query("UPDATE products SET\n      reviewAvg = ((reviewavg*reviewcount)-$1)/(reviewcount-1), reviewcount = reviewcount-1\n      WHERE id = $2\n      RETURNING reviewavg, reviewcount;", [newReview, id]).then(function (result) {
             var rowCount = result.rowCount;
             if (rowCount === 0) {
                 throw new RangeError('Could not delete review');
             }
-            var reviewavg = result.rows[0].reviewavg;
-            return reviewavg;
+            return result.rows[0];
         });
     },
     // Pre-Test Transaction

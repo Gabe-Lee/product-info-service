@@ -92,15 +92,14 @@ const db: Database = {
       `UPDATE products SET 
       reviewavg = ((reviewavg*reviewcount)+$1)/(reviewcount+1), reviewcount = reviewcount+1
       WHERE id = $2
-      RETURNING reviewavg;`,
+      RETURNING reviewavg, reviewcount;`,
       [newReview, id],
     ).then((result) => {
       const { rowCount } = result;
       if (rowCount === 0) {
         throw new RangeError('Could not add review');
       }
-      const { reviewavg } = result.rows[0];
-      return reviewavg;
+      return result.rows[0];
     });
   },
 
@@ -110,15 +109,14 @@ const db: Database = {
       `UPDATE products SET
       reviewAvg = ((reviewavg*reviewcount)-$1)/(reviewcount-1), reviewcount = reviewcount-1
       WHERE id = $2
-      RETURNING reviewavg;`,
+      RETURNING reviewavg, reviewcount;`,
       [newReview, id],
     ).then((result) => {
       const { rowCount } = result;
       if (rowCount === 0) {
         throw new RangeError('Could not delete review');
       }
-      const { reviewavg } = result.rows[0];
-      return reviewavg;
+      return result.rows[0];
     });
   },
 
