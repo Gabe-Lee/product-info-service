@@ -1,6 +1,6 @@
 import * as express from 'express';
 import * as Cors from 'cors';
-import { db } from '../database/db';
+import database from '../database/db';
 
 const server = express();
 const json = express.json();
@@ -13,28 +13,106 @@ server.use('/', express.static('public'));
 server.use('/bundle', express.static('public/bundle.js'));
 server.use('/style', express.static('public/style.css'));
 
+
+// Products
 server.get('/products/:id', (req, res) => {
   const { id } = req.params;
-  console.log(typeof id)
-  db.getProduct(Number(id))
+  console.log(typeof id);
+  database.getProduct(Number(id))
     .then((product) => {
       res.status(200).send(product);
     })
     .catch((err) => {
       console.error(err);
-      res.status(500).send('Error: Product Not Found')
-    });
-});
-
-server.patch('products/:id/reviews/update', (req, res) => {
-  const { productId, newReviewAvg, newReviewCount } = req.body;
-  db.addReview(productId, newReviewAvg, newReviewCount)
-    .then((updateCount) => {
-      res.status(200).end();
-    })
-    .catch((err) => {
       res.status(500).send('Error: Product Not Found');
     });
 });
 
-export { server };
+server.post('/products', (req, res) => {
+  const { product } = req.body;
+  database.addProduct(product)
+    .then((insertCount) => {
+      if (insertCount) {
+        res.status(200).end();
+      } else {
+        throw new Error();
+      }
+    })
+    .catch((err: Error) => {
+      console.error(err);
+      res.status(500).send('Error: could not create new product');
+    });
+});
+
+
+server.put('products/:id', (req, res) => {
+  const id = Number(req.params.id);
+  const { newProduct } = req.body;
+  database.replaceProduct(id, newProduct)
+    .then((replaceCount) => {
+      if (replaceCount) {
+        res.status(200).end();
+      } else {
+        throw new Error();
+      }
+    })
+    .catch((err: Error) => {
+      console.error(err);
+      res.status(500).send('Error: could not replace product');
+    });
+});
+
+server.delete('/products/:id', (req, res) => {
+  const id = Number(req.params.id);
+  database.deleteProduct(id)
+    .then((deleteCount) => {
+      if (deleteCount) {
+        res.status(200).end();
+      } else {
+        throw new Error();
+      }
+    })
+    .catch((err: Error) => {
+      console.error(err);
+      res.status(500).send('Error: could not delete product');
+    });
+});
+
+// Reviews
+server.patch('products/:id/reviews', (req, res) => {
+  const { productId } = req.params;
+  const id = Number(productId);
+  const { newReview } = req.body;
+  database.addReview(id, newReview)
+    .then((updateCount) => {
+      if (updateCount) {
+        res.status(200).end();
+      } else {
+        throw new Error();
+      }
+    })
+    .catch((err: Error) => {
+      console.error(err);
+      res.status(500).send('Error: could not add review');
+    });
+});
+
+server.delete('products/:id/reviews', (req, res) => {
+  const { productId } = req.params;
+  const id = Number(productId);
+  const { oldReview } = req.body;
+  database.addReview(id, oldReview)
+    .then((updateCount) => {
+      if (updateCount) {
+        res.status(200).end();
+      } else {
+        throw new Error();
+      }
+    })
+    .catch((err: Error) => {
+      console.error(err);
+      res.status(500).send('Error: could not delete review');
+    });
+});
+
+export default server;

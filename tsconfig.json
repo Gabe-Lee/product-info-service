@@ -10,12 +10,12 @@
     "allowJs": true
   },
   "include": [
-    "./src/server/**/*",
-    "./src/database/**/*", "src/env.ts"
+    "./src/**/*"
   ],
   "exclude": [
     "./node_modules/**/*",
     "./dist/**/*",
-    "./src/client/**/*"
+    "./src/client/**/*",
+    "./src/dev/**/*"
   ]
 }

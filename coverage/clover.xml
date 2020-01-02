@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1577846853831" clover="3.2.0">
+  <project timestamp="1577846853831" name="All files">
+    <metrics statements="124" coveredstatements="75" conditionals="24" coveredconditionals="8" methods="46" coveredmethods="21" elements="194" coveredelements="104" complexity="0" loc="124" ncloc="124" packages="3" files="6" classes="6"/>
+    <package name="src">
+      <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="Interfaces.ts" path="/home/gabe/Documents/Code/HackReactor/SDC/Bruce_Product-Description-Service/src/Interfaces.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="34" count="1" type="stmt"/>
+        <line num="58" count="1" type="stmt"/>
+      </file>
+      <file name="env.ts" path="/home/gabe/Documents/Code/HackReactor/SDC/Bruce_Product-Description-Service/src/env.ts">
+        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.database">
+      <metrics statements="72" coveredstatements="23" conditionals="20" coveredconditionals="4" methods="31" coveredmethods="6"/>
+      <file name="db.ts" path="/home/gabe/Documents/Code/HackReactor/SDC/Bruce_Product-Description-Service/src/database/db.ts">
+        <metrics statements="19" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="15" coveredmethods="2"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="10" count="14" type="stmt"/>
+        <line num="11" count="12" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="35" count="0" type="stmt"/>
+        <line num="36" count="0" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="42" count="0" type="stmt"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="44" count="0" type="stmt"/>
+        <line num="48" count="1" type="stmt"/>
+      </file>
+      <file name="postgres.ts" path="/home/gabe/Documents/Code/HackReactor/SDC/Bruce_Product-Description-Service/src/database/postgres.ts">
+        <metrics statements="43" coveredstatements="12" conditionals="12" coveredconditionals="2" methods="13" coveredmethods="3"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="11" count="12" type="stmt"/>
+        <line num="13" count="12" type="stmt"/>
+        <line num="14" count="12" type="cond" truecount="2" falsecount="0"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="17" count="11" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="38" count="0" type="stmt"/>
+        <line num="39" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="40" count="0" type="stmt"/>
+        <line num="42" count="0" type="stmt"/>
+        <line num="49" count="0" type="stmt"/>
+        <line num="50" count="0" type="stmt"/>
+        <line num="51" count="0" type="stmt"/>
+        <line num="53" count="0" type="stmt"/>
+        <line num="64" count="0" type="stmt"/>
+        <line num="65" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="66" count="0" type="stmt"/>
+        <line num="68" count="0" type="stmt"/>
+        <line num="74" count="0" type="stmt"/>
+        <line num="76" count="0" type="stmt"/>
+        <line num="77" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="78" count="0" type="stmt"/>
+        <line num="80" count="0" type="stmt"/>
+        <line num="86" count="0" type="stmt"/>
+        <line num="91" count="0" type="stmt"/>
+        <line num="92" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="93" count="0" type="stmt"/>
+        <line num="95" count="0" type="stmt"/>
+        <line num="101" count="0" type="stmt"/>
+        <line num="106" count="0" type="stmt"/>
+        <line num="107" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="108" count="0" type="stmt"/>
+        <line num="110" count="0" type="stmt"/>
+        <line num="115" count="1" type="stmt"/>
+        <line num="117" count="1" type="stmt"/>
+      </file>
+      <file name="utils.ts" path="/home/gabe/Documents/Code/HackReactor/SDC/Bruce_Product-Description-Service/src/database/utils.ts">
+        <metrics statements="10" coveredstatements="5" conditionals="8" coveredconditionals="2" methods="3" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="4" count="14" type="cond" truecount="2" falsecount="0"/>
+        <line num="6" count="1" type="cond" truecount="0" falsecount="4"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="11" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.dev">
+      <metrics statements="45" coveredstatements="45" conditionals="4" coveredconditionals="4" methods="15" coveredmethods="15"/>
+      <file name="fakeProduct.ts" path="/home/gabe/Documents/Code/HackReactor/SDC/Bruce_Product-Description-Service/src/dev/fakeProduct.ts">
+        <metrics statements="45" coveredstatements="45" conditionals="4" coveredconditionals="4" methods="15" coveredmethods="15"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="100003" type="cond" truecount="2" falsecount="0"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="100003" type="cond" truecount="2" falsecount="0"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="100003" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="16" count="100003" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="20" count="100003" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="24" count="100003" type="stmt"/>
+        <line num="27" count="100003" type="stmt"/>
+        <line num="30" count="100003" type="stmt"/>
+        <line num="33" count="100003" type="stmt"/>
+        <line num="35" count="100003" type="stmt"/>
+        <line num="37" count="100003" type="stmt"/>
+        <line num="39" count="100003" type="stmt"/>
+        <line num="41" count="100003" type="stmt"/>
+        <line num="43" count="700021" type="stmt"/>
+        <line num="45" count="1" type="stmt"/>
+        <line num="46" count="100003" type="stmt"/>
+        <line num="47" count="100003" type="stmt"/>
+        <line num="48" count="100003" type="stmt"/>
+        <line num="49" count="100003" type="stmt"/>
+        <line num="50" count="100003" type="stmt"/>
+        <line num="51" count="100003" type="stmt"/>
+        <line num="52" count="100003" type="stmt"/>
+        <line num="53" count="100003" type="stmt"/>
+        <line num="54" count="100003" type="stmt"/>
+        <line num="55" count="100003" type="stmt"/>
+        <line num="56" count="100003" type="stmt"/>
+        <line num="57" count="100003" type="stmt"/>
+        <line num="58" count="100003" type="stmt"/>
+        <line num="59" count="100003" type="stmt"/>
+        <line num="60" count="100003" type="stmt"/>
+        <line num="61" count="100003" type="stmt"/>
+        <line num="62" count="100003" type="stmt"/>
+        <line num="63" count="100003" type="stmt"/>
+        <line num="64" count="100003" type="stmt"/>
+        <line num="65" count="100003" type="stmt"/>
+        <line num="66" count="100003" type="stmt"/>
+        <line num="67" count="100003" type="stmt"/>
+        <line num="70" count="1" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>

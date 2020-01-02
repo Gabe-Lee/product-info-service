@@ -9,7 +9,7 @@ const DB = {
     },
     REMOTE: {
 
-    }
+    },
   },
   MG: {
     LOCAL: {
@@ -18,20 +18,22 @@ const DB = {
       password: 'superman64',
       database: 'SDC_MG',
       port: 27017,
-    }
+    },
 
-  }
-}
+  },
+};
 
-const SERVER ={
+const SERVER = {
   LOCAL: {
     PORT: 3333,
     HOST: 'localhost',
     URL: 'localhost:3333',
-  }
+  },
 };
 
 const MODE = 'LOCAL';
 const SERVICE = 'postgres';
 
-export { DB, SERVER, MODE, SERVICE };
+export {
+  DB, SERVER, MODE, SERVICE,
+};
