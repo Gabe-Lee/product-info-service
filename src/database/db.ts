@@ -1,34 +1,56 @@
-import * as pg from 'pg';
-const ENV = require('./env');
+import db from './postgres'; // Change to reference chosen database service
+import { Database } from '../Interfaces';
+import { verifyId, verifyProduct, verifyReview } from './utils';
 
-const pgClient = new pg.Client({
-  host: 'product-database.cdrcwxiifuzp.us-east-2.rds.amazonaws.com',
-  port: 3306,
-  user: 'admin',
-  password: ENV.password,
-  database: 'Products',
-});
+// Database Access
+const database: Database = {
 
-pgClient.connect(() => console.log('Connected to Database!'));
+  // (GET) => /products/:id
+  getProduct(id) {
+    return verifyId(id)
+      .then(() => db.getProduct(id));
+  },
 
-const updateOneProduct = (callback: Function, id: Number, newAvg: Number, newTotal: Number) => {
-  pgClient.query(`UPDATE Products.info SET reviewAvg=${newAvg}, reviewCount=${newTotal} WHERE id = ${id}`, (err, results) => {
-    if (err) {
-      callback(err, null);
-    } else {
-      callback(null, results);
-    }
-  });
+  // (POST) -> /products
+  addProduct(product) {
+    return verifyProduct(product)
+      .then(() => db.addProduct(product));
+  },
+
+  // (PUT) -> /products/:id
+  replaceProduct(id, newProduct) {
+    return verifyId(id)
+      .then(() => verifyProduct(newProduct))
+      .then(() => db.replaceProduct(id, newProduct));
+  },
+
+  // (DELETE) -> /products/:id
+  deleteProduct(id) {
+    return verifyId(id)
+      .then(() => db.deleteProduct(id));
+  },
+
+  // (PATCH) => /products/:id/reviews
+  addReview(id, newReview) {
+    return verifyId(id)
+      .then(() => verifyReview(newReview))
+      .then(() => db.addReview(id, newReview));
+  },
+
+  // (DELETE) -> /products/:id/reviews
+  deleteReview(id, oldReview) {
+    return verifyId(id)
+      .then(() => verifyReview(oldReview))
+      .then(() => db.deleteReview(id, oldReview));
+  },
+
+  beginTest(savePoint = 'save') {
+    return db.beginTest(savePoint);
+  },
+
+  endTest(savePoint = 'save') {
+    return db.endTest(savePoint);
+  },
 };
 
-const selectOneProduct = (callback: Function, id: Number) => {
-  pgClient.query(`SELECT * FROM Products.info WHERE id = ${id}`, (err, results) => {
-    if (err) {
-      callback(err, null);
-    } else {
-      callback(null, results);
-    }
-  });
-};
-
-export { selectOneProduct, updateOneProduct };
+export default database;

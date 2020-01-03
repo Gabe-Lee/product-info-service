@@ -1,43 +1,113 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var express = require("express");
-var cors = require("cors");
-var app = express();
-var port = 3030;
-var db = require("../database/db");
-app.use(cors());
-app.use(express.json());
-app.use('/', express.static('public'));
-app.use('/bundle', express.static('public/bundle.js'));
-app.use('/styleSheet', express.static('public/style.css'));
-app.get('/displayProduct/:id', function (req, res) {
+var Cors = require("cors");
+var db_1 = require("../database/db");
+var server = express();
+var json = express.json();
+var cors = Cors();
+server.use(cors);
+server.use(json);
+server.use('/', express.static('public'));
+server.use('/bundle', express.static('public/bundle.js'));
+server.use('/style', express.static('public/style.css'));
+// Products
+server.get('/products/:id', function (req, res) {
     var id = req.params.id;
-    db.selectOneProduct(function (err, results) {
-        if (err) {
-            console.log(err);
-            res.sendStatus(404);
+    db_1.default.getProduct(Number(id))
+        .then(function (product) {
+        res.status(200).send(product);
+    })
+        .catch(function (err) {
+        console.error(err);
+        res.status(500).send();
+    });
+});
+server.post('/products', function (req, res) {
+    var product = req.body.product;
+    db_1.default.addProduct(product)
+        .then(function (insertCount) {
+        if (insertCount) {
+            res.status(200).end();
         }
         else {
-            res.send(results);
+            throw new Error();
         }
-    }, Number(id));
+    })
+        .catch(function (err) {
+        console.error(err);
+        res.status(500).send('Error: could not create new product');
+    });
 });
-app.patch('/updateReviewInfo', function (req, res) {
-    var id = req.body.productId;
-    var newAvg = req.body.newReviewAvg;
-    var newTotal = req.body.newReviewCount;
-    console.log(id);
-    console.log(newAvg);
-    console.log(newTotal);
-    db.updateOneProduct(function (err, results) {
-        if (err) {
-            console.log(err);
-            res.sendStatus(404);
+server.put('/products/:id', function (req, res) {
+    var id = Number(req.params.id);
+    var newProduct = req.body.newProduct;
+    db_1.default.replaceProduct(id, newProduct)
+        .then(function (replaceCount) {
+        if (replaceCount) {
+            res.status(200).end();
         }
         else {
-            res.send(results);
+            throw new Error();
         }
-    }, id, newAvg, newTotal);
+    })
+        .catch(function (err) {
+        console.error(err);
+        res.status(500).send('Error: could not replace product');
+    });
 });
-app.listen(port, function () { return console.log("Listening on port " + port + "!"); });
+server.delete('/products/:id', function (req, res) {
+    var id = Number(req.params.id);
+    db_1.default.deleteProduct(id)
+        .then(function (deleteCount) {
+        if (deleteCount) {
+            res.status(200).end();
+        }
+        else {
+            throw new Error();
+        }
+    })
+        .catch(function (err) {
+        console.error(err);
+        res.status(500).send('Error: could not delete product');
+    });
+});
+// Reviews
+server.patch('/products/:id/reviews', function (req, res) {
+    var productId = req.params.productId;
+    var id = Number(productId);
+    var newReview = req.body.newReview;
+    db_1.default.addReview(id, newReview)
+        .then(function (updateCount) {
+        if (updateCount) {
+            res.status(200).end();
+        }
+        else {
+            throw new Error();
+        }
+    })
+        .catch(function (err) {
+        console.error(err);
+        res.status(500).send('Error: could not add review');
+    });
+});
+server.delete('/products/:id/reviews', function (req, res) {
+    var productId = req.params.productId;
+    var id = Number(productId);
+    var oldReview = req.body.oldReview;
+    db_1.default.addReview(id, oldReview)
+        .then(function (updateCount) {
+        if (updateCount) {
+            res.status(200).end();
+        }
+        else {
+            throw new Error();
+        }
+    })
+        .catch(function (err) {
+        console.error(err);
+        res.status(500).send('Error: could not delete review');
+    });
+});
+exports.default = server;
 //# sourceMappingURL=server.js.map

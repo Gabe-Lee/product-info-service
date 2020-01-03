@@ -5,8 +5,8 @@ import MiddlePackage from './MiddlePackage';
 import LastPackage from './LastPackage';
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
 
     this.state = {
       productId: '',
@@ -36,23 +36,20 @@ class App extends React.Component {
 
     this.incQuantityCount = this.incQuantityCount.bind(this);
     this.decQuantityCount = this.decQuantityCount.bind(this);
-    this.displayModal = this.displayModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
     this.recordShoppingCartVal = this.recordShoppingCartVal.bind(this);
-    this.displayDeliveryDrawer = this.displayDeliveryDrawer.bind(this);
     this.onHoverColorChange = this.onHoverColorChange.bind(this);
     this.changeWidthOnStars = this.changeWidthOnStars.bind(this);
     this.updatePage = this.updatePage.bind(this);
-    this.scrollToReviewDrawer = this.scrollToReviewDrawer.bind(this);
   }
 
   componentDidMount() {
     this.updatePage(3);
     window.addEventListener('productChanged', (event) => {
+      const { productId } = event.detail;
       this.setState({
-        productId: event.detail.productId,
+        productId,
       }, () => {
-        this.updatePage(this.state.productId);
+        this.updatePage(productId);
       });
     });
     window.addEventListener('newReview', (event) => {
@@ -60,37 +57,16 @@ class App extends React.Component {
     });
   }
 
-  onHoverColorChange(e) {
-    e.target.style.backgroundColor = 'lightgrey';
-  }
-
   decQuantityCount() {
     const { productQuant } = this.state;
     this.setState({ productQuantity: productQuant - 1 });
   }
 
-  displayModal(id) {
-    // console.log('DISPLAYING MODEL');
-    document.getElementById(id).style.display = 'flex';
-  }
-
-  closeModal(id) {
-    // console.log('CLOSING MODEL');
-    document.getElementById(id).style.display = 'none';
-  }
-
-  displayDeliveryDrawer() {
-    if (document.getElementById('b_deliveryHiddenDiv').style.display === 'none') {
-      document.getElementById('b_deliveryHiddenDiv').style.display = 'flex';
-    } else {
-      document.getElementById('b_deliveryHiddenDiv').style.display = 'none';
-    }
-  }
-
   recordShoppingCartVal() {
+    const { shoppingCartVal } = this.state;
     // console.log(Number(document.getElementById('Quantity').innerText));
     const numToAdd = Number(document.getElementById('b_Quantity').innerText);
-    this.setState({ shoppingCartVal: this.state.shoppingCartVal + numToAdd });
+    this.setState({ shoppingCartVal: shoppingCartVal + numToAdd });
   }
 
   incQuantityCount() {
@@ -99,30 +75,20 @@ class App extends React.Component {
   }
 
   changeWidthOnStars() {
-    const newSizePercent = this.state.productReviewAvg * 20;
-    console.log(newSizePercent);
+    const { productReviewAvg } = this.state;
+    const newSizePercent = productReviewAvg * 20;
     document.getElementById('b_starColorID').style.width = `${newSizePercent}%`;
   }
 
-  scrollToReviewDrawer() {
-    console.log(window.scrollY);
-    document.body.scrollTop = 1350;
-  }
-
   newReview(newReviewRating) {
-    const productCounter = this.state.productReviewCounter;
-    const totalReviewRating = this.state.productReviewAvg * this.state.productReviewCounter;
-    console.log(totalReviewRating);
+    const { productReviewCounter, productReviewAvg, productId } = this.state;
+    const productCounter = productReviewCounter;
+    const totalReviewRating = productReviewAvg * productReviewCounter;
     this.setState({ productReviewCounter: productCounter + 1 }, () => {
       const newReviewRatingTotal = totalReviewRating + newReviewRating.newRating;
-      console.log(newReviewRatingTotal);
-      const newReviewAvg = (newReviewRatingTotal / this.state.productReviewCounter).toFixed(1);
+      const newReviewAvg = (newReviewRatingTotal / productReviewCounter).toFixed(1);
       this.setState({ productReviewAvg: newReviewAvg }, () => {
-        axios.patch('/updateReviewInfo', { newReviewCount: this.state.productReviewCounter, newReviewAvg: this.state.productReviewAvg, productId: this.state.productId }, { baseURL: 'http://ikeaproducts.us-east-2.elasticbeanstalk.com' })
-          .then((newReviewInfo) => {
-            console.log('Heres the data!');
-            console.log(newReviewInfo.data);
-          })
+        axios.patch('/updateReviewInfo', { newReviewCount: productReviewCounter, newReviewAvg: productReviewAvg, productId }, { baseURL: 'http://ikeaproducts.us-east-2.elasticbeanstalk.com' })
           .catch((err) => {
             console.log(err);
           });
@@ -132,7 +98,7 @@ class App extends React.Component {
 
 
   updatePage(id) {
-    axios.get(`/displayProduct/${id}`, { baseURL: 'http://ikeaproducts.us-east-2.elasticbeanstalk.com' })
+    axios.get(`/products/${id}`, { baseURL: 'http://ikeaproducts.us-east-2.elasticbeanstalk.com' })
       .then((productInfo) => {
         this.setState({
           productId: productInfo.data[0].id,
@@ -165,55 +131,70 @@ class App extends React.Component {
       });
   }
 
-
-
-
   render() {
+    const {
+      productId, productName, productDescr, productPrice, productDealLen, productRegPrice,
+      productReviewAvg, productReviewCounter, productBenefit, productSizeOpt, productColorOpt,
+      productMattressOpt, productLegsOpt, productSlattedBedBaseOpt, productIkeaFamilySale,
+      productOnSale, productNew, productSoldSeparateMessage, productQuantity,
+      productNotQuitePerfectBox, productAvaliableForDelivery, productAssembly,
+    } = this.state;
+
+    const { incQuantityCount, decQuantityCount, recordShoppingCartVal } = this;
+
     return (
       <div className="b_mainContainer">
         <TopPackage
-          pId={this.state.productId}
-          pName={this.state.productName}
-          pDescr={this.state.productDescr}
-          pPrice={this.state.productPrice}
-          pDealLen={this.state.productDealLen}
-          pRegPrice={this.state.productRegPrice}
-          pReviewAvg={this.state.productReviewAvg}
-          pReviewCounter={this.state.productReviewCounter}
-          pBenefit={this.state.productBenefit}
-          pSizeOpt={this.state.productSizeOpt}
-          pColorOpt={this.state.productColorOpt}
-          pMattressOpt={this.state.productMattressOpt}
-          pLegsOpt={this.state.productLegsOpt}
-          pSlattedBedBaseOpt={this.state.productSlattedBedBaseOpt}
-          pIkeaFamilySale={this.state.productIkeaFamilySale}
-          pOnSale={this.state.productOnSale}
-          pNew={this.state.productNew}
-          pSoldSeparateMessage={this.state.productSoldSeparateMessage}
-          displayModal={this.displayModal}
-          closeModal={this.closeModal}
-          onHoverChangeColor={this.onHoverColorChange}
-          scrollToReviewDrawer={this.scrollToReviewDrawer}
+          pId={productId}
+          pName={productName}
+          pDescr={productDescr}
+          pPrice={productPrice}
+          pDealLen={productDealLen}
+          pRegPrice={productRegPrice}
+          pReviewAvg={productReviewAvg}
+          pReviewCounter={productReviewCounter}
+          pBenefit={productBenefit}
+          pSizeOpt={productSizeOpt}
+          pColorOpt={productColorOpt}
+          pMattressOpt={productMattressOpt}
+          pLegsOpt={productLegsOpt}
+          pSlattedBedBaseOpt={productSlattedBedBaseOpt}
+          pIkeaFamilySale={productIkeaFamilySale}
+          pOnSale={productOnSale}
+          pNew={productNew}
+          pSoldSeparateMessage={productSoldSeparateMessage}
+          displayModal={App.displayModal}
+          closeModal={App.closeModal}
+          scrollToReviewDrawer={App.scrollToReviewDrawer}
         />
 
         <MiddlePackage
-          pQuantity={this.state.productQuantity}
-          qInc={this.incQuantityCount}
-          qDec={this.decQuantityCount}
-          pNotQuitePerfectBox={this.state.productNotQuitePerfectBox}
-          recordShoppingCartVal={this.recordShoppingCartVal}
+          pQuantity={productQuantity}
+          qInc={incQuantityCount}
+          qDec={decQuantityCount}
+          pNotQuitePerfectBox={productNotQuitePerfectBox}
+          recordShoppingCartVal={recordShoppingCartVal}
         />
 
         <LastPackage
-          pAvaliableForDelivery={this.state.productAvaliableForDelivery}
-          pAssembly={this.state.productAssembly}
-          displayDeliveryDrawer={this.displayDeliveryDrawer}
+          pAvaliableForDelivery={productAvaliableForDelivery}
+          pAssembly={productAssembly}
+          displayDeliveryDrawer={App.displayDeliveryDrawer}
         />
-
       </div>
 
     );
   }
 }
+App.scrollToReviewDrawer = () => { document.body.scrollTop = 1350; };
+App.displayModal = (id) => { document.getElementById(id).style.display = 'flex'; };
+App.closeModal = (id) => { document.getElementById(id).style.display = 'none'; };
+App.displayDeliveryDrawer = () => {
+  if (document.getElementById('b_deliveryHiddenDiv').style.display === 'none') {
+    document.getElementById('b_deliveryHiddenDiv').style.display = 'flex';
+  } else {
+    document.getElementById('b_deliveryHiddenDiv').style.display = 'none';
+  }
+};
 
 export default App;

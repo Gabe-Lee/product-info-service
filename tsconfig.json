@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "strict": true,
     "outDir": "./dist",
     "rootDir": "./src",
     "sourceMap": true,
@@ -9,12 +10,12 @@
     "allowJs": true
   },
   "include": [
-    "./src/server/**/*",
-    "./src/database/**/*"
+    "./src/**/*"
   ],
   "exclude": [
     "./node_modules/**/*",
     "./dist/**/*",
-    "./src/client/**/*"
+    "./src/client/**/*",
+    "./src/dev/**/*"
   ]
 }

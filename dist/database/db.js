@@ -1,35 +1,50 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var pg = require("pg");
-var ENV = require('./env');
-var pgClient = new pg.Client({
-    host: 'product-database.cdrcwxiifuzp.us-east-2.rds.amazonaws.com',
-    port: 3306,
-    user: 'admin',
-    password: ENV.password,
-    database: 'Products',
-});
-pgClient.connect(function () { return console.log('Connected to Database!'); });
-var updateOneProduct = function (callback, id, newAvg, newTotal) {
-    pgClient.query("UPDATE Products.info SET reviewAvg=" + newAvg + ", reviewCount=" + newTotal + " WHERE id = " + id, function (err, results) {
-        if (err) {
-            callback(err, null);
-        }
-        else {
-            callback(null, results);
-        }
-    });
+var postgres_1 = require("./postgres"); // Change to reference chosen database service
+var utils_1 = require("./utils");
+// Database Access
+var database = {
+    // (GET) => /products/:id
+    getProduct: function (id) {
+        return utils_1.verifyId(id)
+            .then(function () { return postgres_1.default.getProduct(id); });
+    },
+    // (POST) -> /products
+    addProduct: function (product) {
+        return utils_1.verifyProduct(product)
+            .then(function () { return postgres_1.default.addProduct(product); });
+    },
+    // (PUT) -> /products/:id
+    replaceProduct: function (id, newProduct) {
+        return utils_1.verifyId(id)
+            .then(function () { return utils_1.verifyProduct(newProduct); })
+            .then(function () { return postgres_1.default.replaceProduct(id, newProduct); });
+    },
+    // (DELETE) -> /products/:id
+    deleteProduct: function (id) {
+        return utils_1.verifyId(id)
+            .then(function () { return postgres_1.default.deleteProduct(id); });
+    },
+    // (PATCH) => /products/:id/reviews
+    addReview: function (id, newReview) {
+        return utils_1.verifyId(id)
+            .then(function () { return utils_1.verifyReview(newReview); })
+            .then(function () { return postgres_1.default.addReview(id, newReview); });
+    },
+    // (DELETE) -> /products/:id/reviews
+    deleteReview: function (id, oldReview) {
+        return utils_1.verifyId(id)
+            .then(function () { return utils_1.verifyReview(oldReview); })
+            .then(function () { return postgres_1.default.deleteReview(id, oldReview); });
+    },
+    beginTest: function (savePoint) {
+        if (savePoint === void 0) { savePoint = 'save'; }
+        return postgres_1.default.beginTest(savePoint);
+    },
+    endTest: function (savePoint) {
+        if (savePoint === void 0) { savePoint = 'save'; }
+        return postgres_1.default.endTest(savePoint);
+    },
 };
-exports.updateOneProduct = updateOneProduct;
-var selectOneProduct = function (callback, id) {
-    pgClient.query("SELECT * FROM Products.info WHERE id = " + id, function (err, results) {
-        if (err) {
-            callback(err, null);
-        }
-        else {
-            callback(null, results);
-        }
-    });
-};
-exports.selectOneProduct = selectOneProduct;
+exports.default = database;
 //# sourceMappingURL=db.js.map
