@@ -7,16 +7,13 @@ var pgClient = new pg.Pool(DATABASE);
 var db = {
     // (GET) => /products/:id
     getProduct: function (id) {
-        return pgClient.connect()
-            .then(function (client) { return client.query('SELECT * FROM products WHERE id = $1;', [id]).then(function (result) {
+        return pgClient.query('SELECT * FROM products WHERE id = $1;', [id]).then(function (result) {
             var product = result.rows[0];
             if (product === undefined) {
                 throw new RangeError("Product with id " + id + " not found");
             }
             return product;
-        }).finally(function () {
-            client.release();
-        }); });
+        });
     },
     // (POST) -> /products
     addProduct: function (product) {

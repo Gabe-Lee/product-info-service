@@ -8,19 +8,16 @@ const pgClient = new pg.Pool(DATABASE);
 const db: Database = {
   // (GET) => /products/:id
   getProduct(id) {
-    return pgClient.connect()
-      .then((client) => client.query(
-        'SELECT * FROM products WHERE id = $1;',
-        [id],
-      ).then((result) => {
-        const product = result.rows[0];
-        if (product === undefined) {
-          throw new RangeError(`Product with id ${id} not found`);
-        }
-        return product as Product;
-      }).finally(() => {
-        client.release();
-      }));
+    return pgClient.query(
+      'SELECT * FROM products WHERE id = $1;',
+      [id],
+    ).then((result) => {
+      const product = result.rows[0];
+      if (product === undefined) {
+        throw new RangeError(`Product with id ${id} not found`);
+      }
+      return product as Product;
+    });
   },
 
   // (POST) -> /products
