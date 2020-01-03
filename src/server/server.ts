@@ -1,5 +1,6 @@
 import * as express from 'express';
 import * as Cors from 'cors';
+import * as path from 'path';
 import database from '../database/db';
 
 const server = express();
@@ -13,6 +14,10 @@ server.use('/', express.static('public'));
 server.use('/bundle', express.static('public/bundle.js'));
 server.use('/style', express.static('public/style.css'));
 
+// Loader,io verification
+server.get('/loaderio-3e6d7d5ca39c1a17ab4b0c9b06ace391', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../../loaderio-3e6d7d5ca39c1a17ab4b0c9b06ace391.txt'));
+});
 
 // Products
 server.get('/products/:id', (req, res) => {
