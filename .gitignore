@@ -19,3 +19,6 @@ tests
 ## Dev Files ##
 dev
 env.*
+
+## Env ##
+env.*

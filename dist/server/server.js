@@ -14,14 +14,13 @@ server.use('/style', express.static('public/style.css'));
 // Products
 server.get('/products/:id', function (req, res) {
     var id = req.params.id;
-    console.log(typeof id);
     db_1.default.getProduct(Number(id))
         .then(function (product) {
         res.status(200).send(product);
     })
         .catch(function (err) {
         console.error(err);
-        res.status(500).send('Error: Product Not Found');
+        res.status(500).send();
     });
 });
 server.post('/products', function (req, res) {
@@ -40,7 +39,7 @@ server.post('/products', function (req, res) {
         res.status(500).send('Error: could not create new product');
     });
 });
-server.put('products/:id', function (req, res) {
+server.put('/products/:id', function (req, res) {
     var id = Number(req.params.id);
     var newProduct = req.body.newProduct;
     db_1.default.replaceProduct(id, newProduct)
@@ -74,7 +73,7 @@ server.delete('/products/:id', function (req, res) {
     });
 });
 // Reviews
-server.patch('products/:id/reviews', function (req, res) {
+server.patch('/products/:id/reviews', function (req, res) {
     var productId = req.params.productId;
     var id = Number(productId);
     var newReview = req.body.newReview;
@@ -92,7 +91,7 @@ server.patch('products/:id/reviews', function (req, res) {
         res.status(500).send('Error: could not add review');
     });
 });
-server.delete('products/:id/reviews', function (req, res) {
+server.delete('/products/:id/reviews', function (req, res) {
     var productId = req.params.productId;
     var id = Number(productId);
     var oldReview = req.body.oldReview;

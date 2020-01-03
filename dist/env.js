@@ -8,8 +8,16 @@ var DB = {
             password: 'superman64',
             database: 'SDC_PG',
             port: 5432,
+            max: 20,
         },
-        REMOTE: {},
+        REMOTE: {
+            host: '52.13.12.54',
+            user: 'jimmy',
+            password: 'superman64',
+            database: 'SDC_PG',
+            port: 5432,
+            max: 20,
+        },
     },
     MG: {
         LOCAL: {
@@ -30,8 +38,6 @@ var SERVER = {
     },
 };
 exports.SERVER = SERVER;
-var MODE = 'LOCAL';
-exports.MODE = MODE;
 var SERVICE = 'postgres';
 exports.SERVICE = SERVICE;
 //# sourceMappingURL=env.js.map

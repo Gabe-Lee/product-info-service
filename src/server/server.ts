@@ -17,14 +17,13 @@ server.use('/style', express.static('public/style.css'));
 // Products
 server.get('/products/:id', (req, res) => {
   const { id } = req.params;
-  console.log(typeof id);
   database.getProduct(Number(id))
     .then((product) => {
       res.status(200).send(product);
     })
     .catch((err) => {
       console.error(err);
-      res.status(500).send('Error: Product Not Found');
+      res.status(500).send();
     });
 });
 
@@ -45,7 +44,7 @@ server.post('/products', (req, res) => {
 });
 
 
-server.put('products/:id', (req, res) => {
+server.put('/products/:id', (req, res) => {
   const id = Number(req.params.id);
   const { newProduct } = req.body;
   database.replaceProduct(id, newProduct)
@@ -79,7 +78,7 @@ server.delete('/products/:id', (req, res) => {
 });
 
 // Reviews
-server.patch('products/:id/reviews', (req, res) => {
+server.patch('/products/:id/reviews', (req, res) => {
   const { productId } = req.params;
   const id = Number(productId);
   const { newReview } = req.body;
@@ -97,7 +96,7 @@ server.patch('products/:id/reviews', (req, res) => {
     });
 });
 
-server.delete('products/:id/reviews', (req, res) => {
+server.delete('/products/:id/reviews', (req, res) => {
   const { productId } = req.params;
   const id = Number(productId);
   const { oldReview } = req.body;

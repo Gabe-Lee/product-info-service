@@ -2,22 +2,25 @@ import * as pg from 'pg';
 import * as ENV from '../env';
 import { Database, Product } from '../Interfaces';
 
-const DATABASE = ENV.DB.PG[ENV.MODE];
-const pgClient = new pg.Client(DATABASE);
+const DATABASE = ENV.DB.PG.REMOTE;
+const pgClient = new pg.Pool(DATABASE);
 
 const db: Database = {
   // (GET) => /products/:id
   getProduct(id) {
-    return pgClient.query(
-      'SELECT * FROM products WHERE id = $1;',
-      [id],
-    ).then((result) => {
-      const product = result.rows[0];
-      if (product === undefined) {
-        throw new RangeError(`Product with id ${id} not found`);
-      }
-      return product as Product;
-    });
+    return pgClient.connect()
+      .then((client) => client.query(
+        'SELECT * FROM products WHERE id = $1;',
+        [id],
+      ).then((result) => {
+        const product = result.rows[0];
+        if (product === undefined) {
+          throw new RangeError(`Product with id ${id} not found`);
+        }
+        return product as Product;
+      }).finally(() => {
+        client.release();
+      }));
   },
 
   // (POST) -> /products
@@ -133,6 +136,6 @@ const db: Database = {
   },
 };
 
-pgClient.connect(() => console.log('Connected to Postgres DB!'));
+// pgClient.connect(() => console.log('Connected to Postgres DB!'));
 
 export default db;

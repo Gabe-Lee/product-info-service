@@ -6,9 +6,15 @@ const DB = {
       password: 'superman64',
       database: 'SDC_PG',
       port: 5432,
+      max: 20,
     },
     REMOTE: {
-
+      host: '52.13.12.54',
+      user: 'jimmy',
+      password: 'superman64',
+      database: 'SDC_PG',
+      port: 5432,
+      max: 20,
     },
   },
   MG: {
@@ -31,9 +37,8 @@ const SERVER = {
   },
 };
 
-const MODE = 'LOCAL';
 const SERVICE = 'postgres';
 
 export {
-  DB, SERVER, MODE, SERVICE,
+  DB, SERVER, SERVICE,
 };

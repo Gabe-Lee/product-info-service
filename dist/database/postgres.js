@@ -2,18 +2,21 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var pg = require("pg");
 var ENV = require("../env");
-var DATABASE = ENV.DB.PG[ENV.MODE];
-var pgClient = new pg.Client(DATABASE);
+var DATABASE = ENV.DB.PG.REMOTE;
+var pgClient = new pg.Pool(DATABASE);
 var db = {
     // (GET) => /products/:id
     getProduct: function (id) {
-        return pgClient.query('SELECT * FROM products WHERE id = $1;', [id]).then(function (result) {
+        return pgClient.connect()
+            .then(function (client) { return client.query('SELECT * FROM products WHERE id = $1;', [id]).then(function (result) {
             var product = result.rows[0];
             if (product === undefined) {
                 throw new RangeError("Product with id " + id + " not found");
             }
             return product;
-        });
+        }).finally(function () {
+            client.release();
+        }); });
     },
     // (POST) -> /products
     addProduct: function (product) {
@@ -84,6 +87,6 @@ var db = {
             .then(function (result) { return result.rowCount; });
     },
 };
-pgClient.connect(function () { return console.log('Connected to Postgres DB!'); });
+// pgClient.connect(() => console.log('Connected to Postgres DB!'));
 exports.default = db;
 //# sourceMappingURL=postgres.js.map
