@@ -9,7 +9,7 @@ const DB = {
       max: 20,
     },
     REMOTE: {
-      host: '52.13.12.54',
+      host: '52.34.103.138',
       user: 'jimmy',
       password: 'superman64',
       database: 'SDC_PG',
