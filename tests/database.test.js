@@ -87,7 +87,7 @@ describe('Database', () => {
 
   // (POST) -> /products
   describe('addProduct() (POST -> /products)', () => {
-    test('it should return a is_new product id when given a valid product', () => db.addProduct(validProduct).then((id) => {
+    test('it should return a new product id when given a valid product', () => db.addProduct(validProduct).then((id) => {
       expect(Number.isInteger(id)).toBe(true);
     }));
     test('it should throw a TypeError when given product with only partial fields', () => db.addProduct(partialProduct).catch((err) => {

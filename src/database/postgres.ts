@@ -32,7 +32,7 @@ const db: Database = {
       `INSERT INTO products 
       (id, name, mini_description, price, deal_len, reg_price, review_avg, review_count,
       description, size, color, mattress, legs, slatted_bed_base, ikea_family_sale,
-      on_sale, new, not_quite_perfect, available_for_delivery, assembly, sold_separate)
+      on_sale, is_new, not_quite_perfect, available_for_delivery, assembly, sold_separate)
       VALUES (DEFAULT, $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20)
       RETURNING id;`,
       [name, mini_description, price, deal_len, reg_price, review_avg, review_count,
@@ -58,7 +58,7 @@ const db: Database = {
       `UPDATE products SET
       (name, mini_description, price, deal_len, reg_price, review_avg, review_count,
       description, size, color, mattress, legs, slatted_bed_base, ikea_family_sale,
-      on_sale, new, not_quite_perfect, available_for_delivery, assembly, sold_separate)
+      on_sale, is_new, not_quite_perfect, available_for_delivery, assembly, sold_separate)
       = ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20)
       WHERE id = $21;`,
       [name, mini_description, price, deal_len, reg_price, review_avg, review_count,
