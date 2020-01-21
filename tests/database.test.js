@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/camelcase */
 /* eslint-disable no-await-in-loop */
 /* eslint-disable @typescript-eslint/no-var-requires */
 const db = require('../dist/database/db').default;
@@ -205,13 +206,13 @@ describe('Database', () => {
     test('it should throw a TypeError when given float id', () => db.deleteReview(3.1415, 5).catch((err) => {
       expect(err).toEqual(expect.any(TypeError));
     }));
-    test('it should throw a RangeError when given a rating below 0', () => db.deleteReview(999, -1).catch((err) => {
+    test('it should throw a RangeError when given a rating below 0', () => db.deleteReview(1, -1).catch((err) => {
       expect(err).toEqual(expect.any(RangeError));
     }));
-    test('it should throw a RangeError when given when given a rating above 10', () => db.deleteReview(999, 10).catch((err) => {
+    test('it should throw a RangeError when given when given a rating above 10', () => db.deleteReview(1, 10).catch((err) => {
       expect(err).toEqual(expect.any(RangeError));
     }));
-    test('it should throw a TypeError when given a non-number rating', () => db.deleteReview(999, 'Very Good').catch((err) => {
+    test('it should throw a TypeError when given a non-number rating', () => db.deleteReview(1, 'Very Good').catch((err) => {
       expect(err).toEqual(expect.any(TypeError));
     }));
   });

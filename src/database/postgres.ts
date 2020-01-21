@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/camelcase */
 import * as pg from 'pg';
 import * as ENV from '../env';
 import { Database, Product } from '../Interfaces';
@@ -23,20 +24,20 @@ const db: Database = {
   // (POST) -> /products
   addProduct(product) {
     const {
-      name, minidescription, price, deallen, regprice, reviewavg, reviewcount,
-      benefit, size, color, mattress, legs, slattedbedbase, ikeafamilysale,
-      onsale, new: isnew, notquiteperfect, avaliablefordelivery, assembly, soldseparate,
+      name, mini_description, price, deal_len, reg_price, review_avg, review_count,
+      description, size, color, mattress, legs, slatted_bed_base, ikea_family_sale,
+      on_sale, is_new, not_quite_perfect, available_for_delivery, assembly, sold_separate,
     } = product;
     return pgClient.query(
       `INSERT INTO products 
-      (id, name, minidescription, price, deallen, regprice, reviewavg, reviewcount,
-      benefit, size, color, mattress, legs, slattedbedbase, ikeafamilysale,
-      onsale, new, notquiteperfect, avaliablefordelivery, assembly, soldseparate)
+      (id, name, mini_description, price, deal_len, reg_price, review_avg, review_count,
+      description, size, color, mattress, legs, slatted_bed_base, ikea_family_sale,
+      on_sale, new, not_quite_perfect, available_for_delivery, assembly, sold_separate)
       VALUES (DEFAULT, $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20)
       RETURNING id;`,
-      [name, minidescription, price, deallen, regprice, reviewavg, reviewcount,
-        benefit, size, color, mattress, legs, slattedbedbase, ikeafamilysale,
-        onsale, isnew, notquiteperfect, avaliablefordelivery, assembly, soldseparate],
+      [name, mini_description, price, deal_len, reg_price, review_avg, review_count,
+        description, size, color, mattress, legs, slatted_bed_base, ikea_family_sale,
+        on_sale, is_new, not_quite_perfect, available_for_delivery, assembly, sold_separate],
     ).then((result) => {
       const newId = result.rows[0].id;
       if (newId === undefined) {
@@ -49,20 +50,20 @@ const db: Database = {
   // (PUT) -> /products/:id
   replaceProduct(id, newProduct) {
     const {
-      name, minidescription, price, deallen, regprice, reviewavg, reviewcount,
-      benefit, size, color, mattress, legs, slattedbedbase, ikeafamilysale,
-      onsale, new: isnew, notquiteperfect, avaliablefordelivery, assembly, soldseparate,
+      name, mini_description, price, deal_len, reg_price, review_avg, review_count,
+      description, size, color, mattress, legs, slatted_bed_base, ikea_family_sale,
+      on_sale, is_new, not_quite_perfect, available_for_delivery, assembly, sold_separate,
     } = newProduct;
     return pgClient.query(
       `UPDATE products SET
-      (name, minidescription, price, deallen, regprice, reviewavg, reviewcount,
-      benefit, size, color, mattress, legs, slattedbedbase, ikeafamilysale,
-      onsale, new, notquiteperfect, avaliablefordelivery, assembly, soldseparate)
+      (name, mini_description, price, deal_len, reg_price, review_avg, review_count,
+      description, size, color, mattress, legs, slatted_bed_base, ikea_family_sale,
+      on_sale, new, not_quite_perfect, available_for_delivery, assembly, sold_separate)
       = ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20)
       WHERE id = $21;`,
-      [name, minidescription, price, deallen, regprice, reviewavg, reviewcount,
-        benefit, size, color, mattress, legs, slattedbedbase, ikeafamilysale,
-        onsale, isnew, notquiteperfect, avaliablefordelivery, assembly, soldseparate, id],
+      [name, mini_description, price, deal_len, reg_price, review_avg, review_count,
+        description, size, color, mattress, legs, slatted_bed_base, ikea_family_sale,
+        on_sale, is_new, not_quite_perfect, available_for_delivery, assembly, sold_separate, id],
     ).then((result) => {
       const { rowCount } = result;
       if (rowCount === 0) {
@@ -90,9 +91,9 @@ const db: Database = {
   addReview(id, newReview) {
     return pgClient.query(
       `UPDATE products SET 
-      reviewavg = ((reviewavg*reviewcount)+$1)/(reviewcount+1), reviewcount = reviewcount+1
+      review_avg = ((review_avg*review_count)+$1)/(review_count+1), review_count = review_count+1
       WHERE id = $2
-      RETURNING reviewavg, reviewcount;`,
+      RETURNING review_avg, review_count;`,
       [newReview, id],
     ).then((result) => {
       const { rowCount } = result;
@@ -107,9 +108,9 @@ const db: Database = {
   deleteReview(id, newReview) {
     return pgClient.query(
       `UPDATE products SET
-      reviewAvg = ((reviewavg*reviewcount)-$1)/(reviewcount-1), reviewcount = reviewcount-1
+      review_avg = ((review_avg*review_count)-$1)/(review_count-1), review_count = review_count-1
       WHERE id = $2
-      RETURNING reviewavg, reviewcount;`,
+      RETURNING review_avg, review_count;`,
       [newReview, id],
     ).then((result) => {
       const { rowCount } = result;
