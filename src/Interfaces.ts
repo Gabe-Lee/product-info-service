@@ -13,48 +13,48 @@ interface Product {
   [index: string]: number | string | boolean;
   id: number;
   name: string;
-  minidescription: string;
+  mini_description: string;
   price: number;
-  deallen: string;
-  regprice: string;
-  reviewavg: number;
-  reviewcount: number;
-  benefit: string;
+  deal_len: string;
+  reg_price: string;
+  review_avg: number;
+  review_count: number;
+  description: string;
   size: string;
   color: string;
   mattress: string;
   legs: string;
-  slattedbedbase: string;
-  ikeafamilysale: string;
-  onsale: boolean;
-  new: boolean;
-  notquiteperfect: boolean;
-  avaliablefordelivery: boolean;
+  slatted_bed_base: string;
+  ikea_family_sale: string;
+  on_sale: boolean;
+  is_new: boolean;
+  not_quite_perfect: boolean;
+  available_for_delivery: boolean;
   assembly: boolean;
-  soldseparate: string;
+  sold_separate: string;
 }
-const TProduct: {[index: string]: string} = {
+const TProduct: { [index: string]: string } = {
   id: 'number',
   name: 'string',
-  minidescription: 'string',
+  mini_description: 'string',
   price: 'number',
-  deallen: 'string',
-  regprice: 'string',
-  reviewavg: 'number',
-  reviewcount: 'number',
-  benefit: 'string',
+  deal_len: 'string',
+  reg_price: 'string',
+  review_avg: 'number',
+  review_count: 'number',
+  description: 'string',
   size: 'string',
   color: 'string',
   mattress: 'string',
   legs: 'string',
-  slattedbedbase: 'string',
-  ikeafamilysale: 'boolean',
-  onsale: 'boolean',
-  new: 'boolean',
-  notquiteperfect: 'boolean',
-  avaliablefordelivery: 'boolean',
+  slatted_bed_base: 'string',
+  ikea_family_sale: 'boolean',
+  on_sale: 'boolean',
+  is_new: 'boolean',
+  not_quite_perfect: 'boolean',
+  available_for_delivery: 'boolean',
   assembly: 'boolean',
-  soldseparate: 'string',
+  sold_separate: 'string'
 };
 
 export { Database, Product, TProduct };

@@ -12,9 +12,10 @@ package-lock
 *.map
 
 ## Testing ##
-tests
-*.spec*
-*.test*
+# tests
+# *.spec*
+# *.test*
+fakeProduct.test.js
 
 ## Dev Files ##
 dev
