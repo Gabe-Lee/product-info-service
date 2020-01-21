@@ -62,8 +62,8 @@ const cardboardProduct = 'TotalyLegitProduct (NOT CARDBOARD!)';
 
 describe('Database', () => {
   // Test Sandboxing
-  beforeAll(() => db.beginTest());
-  afterAll(() => db.endTest());
+  // beforeAll(() => db.beginTest());
+  // afterAll(() => db.endTest());
 
   // (GET) => /products/:id
   describe('getProduct() (GET -> /products/:id)', () => {
